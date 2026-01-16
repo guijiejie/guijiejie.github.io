@@ -52,7 +52,7 @@
     <script>
 async function loadDownloadsFromLocalJson() {
   try {
-    const res = await fetch("/downloads.json", { cache: "no-store" });
+    const res = await fetch("downloads.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     document.getElementById("download-count").innerText = data.total_downloads ?? "N/A";
