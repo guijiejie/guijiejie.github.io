@@ -30,12 +30,56 @@
        <ul>
         <!--     <h2><hr><a name="profact"></a>Pattern Recognition	                             For undergraduate students</h2>-->
         <!--     <h2><hr><a name="profact"></a>Artificial Intelligence and Machine Learning	     For graduate students</h2>-->
-            <li><p> Pattern Recognition - For undergraduate students</p></li>
+            <!-- <li><p> Pattern Recognition - For undergraduate students</p></li> -->
+            <li>
+              <p>
+                Pattern Recognition – For undergraduate students
+                |
+                <a href="https://github.com/guijiejie/PatternRecognition/releases/download/resourse/pr_course.rar"
+                   target="_blank" rel="noopener">
+                   Course Slides
+                </a>
+                (Downloads: <span id="download-count">Loading…</span>)
+              </p>
+            </li>
+
             <li><p> Artificial Intelligence and Machine Learning - For graduate students</p></li>
       </ul>
     </div>
 </td>
 </tr>
 </table>
+    <script>
+async function fetchDownloadCount() {
+  try {
+    const res = await fetch(
+      'https://api.github.com/repos/guijiejie/PatternRecognition/releases',
+      { headers: { 'Accept': 'application/vnd.github+json' } }
+    );
+
+    if (!res.ok) throw new Error(res.status);
+
+    const data = await res.json();
+    let total = 0;
+
+    if (Array.isArray(data)) {
+      data.forEach(release => {
+        if (Array.isArray(release.assets)) {
+          release.assets.forEach(asset => {
+            total += asset.download_count;
+          });
+        }
+      });
+    }
+
+    document.getElementById('download-count').innerText = total;
+  } catch (e) {
+    document.getElementById('download-count').innerText = 'N/A';
+    console.error(e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', fetchDownloadCount);
+    </script>
 </body>
 </html>
