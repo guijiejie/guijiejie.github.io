@@ -31,7 +31,7 @@
         <!--     <h2><hr><a name="profact"></a>Pattern Recognition	                             For undergraduate students</h2>-->
         <!--     <h2><hr><a name="profact"></a>Artificial Intelligence and Machine Learning	     For graduate students</h2>-->
             <!-- <li><p> Pattern Recognition - For undergraduate students</p></li> -->
-            <li>
+            <!-- <li>
               <p>
                 Pattern Recognition – For undergraduate students
                 |
@@ -40,6 +40,27 @@
                    Course Slides
                 </a>
                 (Downloads: <span id="download-count">Loading…</span>)
+              </p>
+            </li> -->
+            <li>
+              <p>
+                Pattern Recognition – For undergraduate students
+                <br>
+                v2 |
+                <a href="https://github.com/guijiejie/PatternRecognition_v2/releases/download/resourse/pr_course.rar"
+                   target="_blank" rel="noopener">
+                   Course Slides
+                </a>
+                (Downloads: <span id="download-count-v2">Loading…</span>)
+                <br>
+                v1 |
+                <a href="https://github.com/guijiejie/PatternRecognition/releases/download/resourse/pr_course.rar"
+                   target="_blank" rel="noopener">
+                   Course Slides
+                </a>
+                (Downloads: <span id="download-count-v1">Loading…</span>)
+                <br>
+                Total Downloads: <span id="download-count-total">Loading…</span>
               </p>
             </li>
 
@@ -51,13 +72,27 @@
 </table>
     <script>
 async function loadDownloadsFromLocalJson() {
+  const v1El = document.getElementById("download-count-v1");
+  const v2El = document.getElementById("download-count-v2");
+  const totalEl = document.getElementById("download-count-total");
+
   try {
     const res = await fetch("downloads.json", { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
     const data = await res.json();
-    document.getElementById("download-count").innerText = data.total_downloads ?? "N/A";
+    const repos = Array.isArray(data.repos) ? data.repos : [];
+
+    const v1 = repos.find(x => x.repo === "guijiejie/PatternRecognition");
+    const v2 = repos.find(x => x.repo === "guijiejie/PatternRecognition_v2");
+
+    v1El.innerText = v1?.total_downloads ?? "N/A";
+    v2El.innerText = v2?.total_downloads ?? "N/A";
+    totalEl.innerText = data.grand_total_downloads ?? "N/A";
   } catch (e) {
-    document.getElementById("download-count").innerText = "N/A";
+    v1El.innerText = "N/A";
+    v2El.innerText = "N/A";
+    totalEl.innerText = "N/A";
     console.error(e);
   }
 }
