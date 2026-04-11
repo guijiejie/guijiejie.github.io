@@ -1,5 +1,14 @@
 {
-  "source": "guijiejie/PatternRecognition",
-  "total_downloads": 148,
-  "updated_at_utc": "2026-04-11T09:33:43.045Z"
+  "repos": [
+    {
+      "repo": "guijiejie/PatternRecognition",
+      "total_downloads": 148
+    },
+    {
+      "repo": "guijiejie/PatternRecognition_v2",
+      "total_downloads": 0
+    }
+  ],
+  "grand_total_downloads": 148,
+  "updated_at_utc": "2026-04-11T09:51:40.992Z"
 }
